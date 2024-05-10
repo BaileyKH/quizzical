@@ -1,0 +1,45 @@
+.home-container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.home-text {
+    margin: 30px 0;
+}
+
+.home-text h1 {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.home-text p{
+    font-size: 1.5rem;
+}
+
+.home-btn {
+    margin-top: 5px;
+}
+
+.home-btn button {
+    background-color: #444474;
+    color: white;
+    font-family: "Karla", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    height: 50px;
+    width: 150px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+}
+
+.home-btn button:active {
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
