@@ -6,7 +6,6 @@ import './Quiz.css'
 export const Quiz = () => {
 
     const [quizData, setQuizData] = useState([]);
-    const [count, setCount] = useState(0)
 
     useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5&category=18&difficulty=medium&type=multiple")
