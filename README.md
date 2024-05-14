@@ -15,4 +15,4 @@ The `Quiz` component is the main component of the application. It handles fetchi
 
 ### Questions
 
-The Questions component is responsible for rendering each quiz question and its possible answers. It also handles the logic for highlighting selected answers and displaying the correct and incorrect answers after submission.
+The `Questions` component is responsible for rendering each quiz question and its possible answers. It also handles the logic for highlighting selected answers and displaying the correct and incorrect answers after submission.
