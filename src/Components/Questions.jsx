@@ -14,7 +14,7 @@ export const Questions = (props) => {
             <div className="answers">
                 {props.allAnswers.map(answer => (
                     <div key={answer} onClick={() => props.selectPick(answer)}>
-                        <p style={{backgroundColor: props.chosenAnswer === answer ? "#59E391" : "none"}}>{decode(answer)}</p>
+                        <p style={{backgroundColor: props.chosenAnswer === answer ? "rgba(255, 255, 255, 0.2)" : "none"}}>{decode(answer)}</p>
                     </div>
                 ))}
             </div>

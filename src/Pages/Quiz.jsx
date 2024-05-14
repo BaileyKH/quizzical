@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import {decode} from 'html-entities';
 
 import { Questions } from '../Components/Questions';
 
@@ -10,6 +9,8 @@ export const Quiz = () => {
 
     const [quizData, setQuizData] = useState([]);
     const [count, setCount] = useState(0)
+    const [playAgain, setPlayAgain] = useState(false)
+    const [reset, setReset] = useState(false)
 
     useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
@@ -37,14 +38,13 @@ export const Quiz = () => {
                 setQuizData(quizResults)
             })
             .catch(err => console.error('Error fetching quiz data:', err));
-    }, []);
+    }, [reset]);
 
     function pickAnswer(id, answer) {
         setQuizData(prevData => prevData.map(data => {
             if(data.id === id) {
                 return {...data, chosenAnswer: data.chosenAnswer ? data.chosenAnswer : answer}
             }
-            console.log(data)
             return data
           }))
     }
@@ -55,6 +55,15 @@ export const Quiz = () => {
                 setCount(prevCount => prevCount + 1)
             }
         })
+        setPlayAgain(prevPlay => !prevPlay)
+    }
+
+    function resetGame() {
+        if (playAgain) {
+            setCount(0)
+            setPlayAgain(prev => !prev)
+            setReset(prevPlay => !prevPlay)
+        }
     }
 
     return(
@@ -65,13 +74,13 @@ export const Quiz = () => {
                     id={quiz.id}
                     question={quiz.question}
                     allAnswers={quiz.allAnswers}
-                    chosenAnswer={quiz.chosenAnswer} 
+                    chosenAnswer={quiz.chosenAnswer}
                     selectPick={(answer) => pickAnswer(quiz.id, answer)}
                 />
             ))}
             <div className="btn-container">
-                <p>Correct: {count} / 5</p>
-                <button onClick={checkAnswer}>Check Answer</button>
+                <p>{playAgain ? `You scored ${count} / 5 correct answers` : ""}</p>
+                <button onClick={() => {playAgain ? resetGame() : checkAnswer()}}>{playAgain ? "Play Again" : "Check Answer"}</button>
             </div>
         </div>
     );
