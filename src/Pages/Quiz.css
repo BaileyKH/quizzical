@@ -62,5 +62,13 @@
 @media only screen and (max-width: 640px) {
     .answers p {
       font-size: 0.8rem;
+      padding: 4px 8px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .answers p {
+      font-size: 0.9rem;
+      padding: 6px 12px;
     }
   }
