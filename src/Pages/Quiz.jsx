@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import {decode} from 'html-entities';
 
-import './Quiz.css'
 import { Questions } from '../Components/Questions';
+
+import './Quiz.css'
+
 
 export const Quiz = () => {
 
@@ -23,12 +25,12 @@ export const Quiz = () => {
                     answerArr.sort(() => Math.random() -0.5)
 
                     return {
-                        id: crypto.randomUUID,
+                        id: crypto.randomUUID(),
                         question: quiz.question,
                         correctAnswer: quiz.correct_answer,
                         incorrectAnswer: quiz.incorrect_answers,
                         allAnswers: answerArr,
-                        chosenAnswer: ''
+                        chosenAnswer: '',
                     }
                 })
                 setQuizData(quizResults)
@@ -36,13 +38,26 @@ export const Quiz = () => {
             .catch(err => console.error('Error fetching quiz data:', err));
     }, []);
 
+    function pickAnswer(id, answer) {
+        setQuizData(prevData => prevData.map(data => {
+            if(data.id === id) {
+                return {...data, chosenAnswer: data.chosenAnswer ? data.chosenAnswer : answer}
+            }
+            console.log(data)
+            return data
+          }))
+    }
+
     return(
         <div className="quiz-main">
             {quizData.map(quiz => (
                 <Questions 
+                    key={quiz.id}
                     id={quiz.id}
                     question={quiz.question}
                     allAnswers={quiz.allAnswers}
+                    chosenAnswer={quiz.chosenAnswer} 
+                    selectPick={(answer) => pickAnswer(quiz.id, answer)}
                 />
             ))}
             <div className="btn-container">
