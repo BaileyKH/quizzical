@@ -7,7 +7,7 @@ export const Home = () => {
         <div className="home-container">
             <div className="home-text">
                 <h1>Quizzical</h1>
-                <p>Test your Computer knowledge</p>
+                <p>Test your knowledge</p>
             </div>
             <div className="home-btn">
                 <Link to="/quiz">
