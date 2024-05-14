@@ -11,6 +11,7 @@ export const Quiz = () => {
     const [count, setCount] = useState(0)
     const [playAgain, setPlayAgain] = useState(false)
     const [reset, setReset] = useState(false)
+    const [checkedAnswers, setCheckedAnswers] = useState(false);
 
     useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
@@ -55,6 +56,7 @@ export const Quiz = () => {
                 setCount(prevCount => prevCount + 1)
             }
         })
+        setCheckedAnswers(true);
         setPlayAgain(prevPlay => !prevPlay)
     }
 
@@ -63,6 +65,7 @@ export const Quiz = () => {
             setCount(0)
             setPlayAgain(prev => !prev)
             setReset(prevPlay => !prevPlay)
+            setCheckedAnswers(false);
         }
     }
 
@@ -75,6 +78,8 @@ export const Quiz = () => {
                     question={quiz.question}
                     allAnswers={quiz.allAnswers}
                     chosenAnswer={quiz.chosenAnswer}
+                    correctAnswer={quiz.correctAnswer}
+                    checkedAnswers={checkedAnswers}
                     selectPick={(answer) => pickAnswer(quiz.id, answer)}
                 />
             ))}
