@@ -9,6 +9,7 @@ import './Quiz.css'
 export const Quiz = () => {
 
     const [quizData, setQuizData] = useState([]);
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
@@ -48,6 +49,14 @@ export const Quiz = () => {
           }))
     }
 
+    function checkAnswer() {
+        quizData.map(answer => {
+            if (answer.correctAnswer === answer.chosenAnswer){
+                setCount(prevCount => prevCount + 1)
+            }
+        })
+    }
+
     return(
         <div className="quiz-main">
             {quizData.map(quiz => (
@@ -61,7 +70,8 @@ export const Quiz = () => {
                 />
             ))}
             <div className="btn-container">
-                <button>Check Answer</button>
+                <p>Correct: {count} / 5</p>
+                <button onClick={checkAnswer}>Check Answer</button>
             </div>
         </div>
     );
